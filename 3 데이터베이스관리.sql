@@ -16,3 +16,12 @@ FLUSH PRIVILEGES;
 
 # 실습하기 3-2
 SET PASSWORD FOR 'tester'@'%'=PASSWORD('1q2w3e');
+
+
+#실습하기 3-3 
+마리아db - command prompt - 관리자 모드 
+
+# cd /
+# mysql -u root -p
+# Enter PASSWORD :
+# show databases 

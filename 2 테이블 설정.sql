@@ -7,8 +7,8 @@
 # 실습하기 2-1
 CREATE TABLE `user2` 
 (	`uid`		VARCHAR(10) PRIMARY key,
-	`name`	VARCHAR(10) ,
-	`hp`		CHAR(13) unique,
+	`name`	VARCHAR(10)            ,
+	`hp`		CHAR(13)         unique,
 	`age`		TINYINT
 );
 
@@ -23,9 +23,9 @@ INSERT INTO `user2` VALUES ('a106','정약용','010-1234-6666', 42);
 
 # 실습하기 2-2
 CREATE TABLE `user3` 
-(	`uid`		VARCHAR(10) PRIMARY key,
-	`name`	VARCHAR(10) ,
-	`hp`		CHAR(13) unique,
+(	`uid`		VARCHAR(10)   PRIMARY key,
+	`name`	VARCHAR(10)              ,
+	`hp`		CHAR(13)           unique,
 	`age`		TINYINT
 );
 
@@ -41,8 +41,8 @@ INSERT INTO `user3` VALUES ('a106','정약용','010-1234-6666', 42);
 # 실습하기 2-3
 CREATE TABLE `parent` 
 (	`uid`		VARCHAR(10) PRIMARY KEY,
-	`name`	VARCHAR(10),
-	`hp`		CHAR(13) UNIQUE
+	`name`	VARCHAR(10)            ,
+	`hp`		CHAR(13)         UNIQUE
 );
 
 INSERT INTO `parent` VALUES ('p101', '김유신', '010-1234-1001');
@@ -51,18 +51,17 @@ INSERT INTO `parent` VALUES ('p103', '이순신', '010-1234-1003');
 
 
 CREATE TABLE `user4` (
-	`uid`		VARCHAR(10) PRIMARY key,
-	`name`	VARCHAR(10),
-	`hp`		CHAR(13) unique,
-	`pID`		VARCHAR(10),
-	FOREIGN KEY (`pID`) REFERENCES `parent` (`uid`)
+	`uid`		VARCHAR(10)   PRIMARY key,
+	`name`	VARCHAR(10)              ,
+	`hp`		CHAR(13)           unique,
+	`pID`		VARCHAR(10), FOREIGN KEY (`pID`) REFERENCES `parent` (`uid`)
 );
 
 INSERT INTO `user4` values ('c101','김철수','010-1234-1111','p101');
 INSERT INTO `user4` values ('c102','장철수','010-1234-2222','p102');
 INSERT INTO `user4` values ('c103','이철수','010-1234-3333','p103');
-INSERT INTO `user4` values ('c104','황철수','010-1234-4444','p104'); //parent에 데이터가 없으므로 안된다.
-INSERT INTO `user4` values ('c104','김영희','010-1234-5555','p101'); //
+INSERT INTO `user4` values ('c104','황철수','010-1234-4444','p104'); //parent에없으므로 안 된다.
+INSERT INTO `user4` values ('c104','김영희','010-1234-5555','p101'); 
 
 
 
@@ -87,10 +86,10 @@ INSERT INTO `user5` (`age`, `addr`) VALUES (27, '광주시'); // NULL 허용시 
 
 # 실습하기 2-5
 CREATE TABLE `user6` 
-(	`seq`		INT AUTO_INCREMENT PRIMARY KEY,
+(	`seq`		INT         AUTO_INCREMENT PRIMARY KEY,
 	`name` 	VARCHAR(10) NOT null,
-	`gender` TINYINT,
-	`age`		INT DEFAULT 1,
+	`gender` TINYINT             ,
+	`age`		INT         DEFAULT 1,
 	`addr`	VARCHAR(255)
 );
 
