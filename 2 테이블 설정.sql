@@ -80,7 +80,7 @@ INSERT INTO `user5` (`name`, `gender`, `age`, `addr`) VALUES ('선덕여왕', 2,
 INSERT INTO `user5` (`name`, `gender`, `age`, `addr`) VALUES ('장보고', 1, 31, '완도시');
 INSERT INTO `user5` (`name`, `gender`, `age`, `addr`) VALUES ('김유신', 2, 42, '강릉시');
 INSERT INTO `user5` (`name`, `gender`, `age`, `addr`) VALUES ('허난설헌', 2, 27, '광주시');
-INSERT INTO `user5` (`age`, `addr`) VALUES (27, '광주시'); // NULL 허용시 쓰레기 발생
+INSERT INTO `user5` (`age`, `addr`) VALUES (27, '광주시');
 
 
 
