@@ -18,7 +18,7 @@ CREATE TABLE `tbl_product`
 	`price`			INT	      NOT NULL,
 	`amount`			INT	      default 0,
 	`company`		VARCHAR(10)          ,
-	`makeDate`		date
+	`makeDate`		DATE 
 );
 
 # 실습하기 4-2
@@ -28,6 +28,8 @@ INSERT INTO `tbl_member` (`memberID`,`memberName`,`memberAge`,`memberAddr`) VALU
 INSERT INTO `tbl_member` (`memberID`,`memberName`,`memberAddr`) VALUES ('p104','강감찬', '고려');
 INSERT INTO `tbl_member` SET `memberID`='p105', `memberName`='이순신', `memberHP`='010-1234-1005', `memberAge`='50';
 
+SELECT*FROM `tbl_member`;
+
 
 INSERT INTO `tbl_product` (`productName`, `price`, `amount`, `company`, `makeDate`) VALUES ('냉장고', 800, 10, 'LG', '2022-01-06');
 INSERT INTO `tbl_product` SET `productName`='노트북', `price`='1200', `amount`='20', `company`='삼성', `makeDate`='2022-01-06';
@@ -36,8 +38,13 @@ INSERT INTO `tbl_product` (`productName`, `price`, `amount`, `company`, `makeDat
 INSERT INTO `tbl_product` (`productName`, `price`) VALUES ('컴퓨터', 1100);
 INSERT INTO `tbl_product` (`productName`, `price`, `amount`, `company`, `makeDate`) VALUES ('휴대폰', 900, 102, '삼성', '2022-01-06');
 
+SELECT*FROM `tbl_product`;
+
 
 # 실습하기 4-3
+
+###############  SELECT*FROM `tbl_member`;
+
 SELECT `memberName` FROM `tbl_member`;
 SELECT `memberName`,`memberHP` FROM `tbl_member`;
 
@@ -51,13 +58,17 @@ UPDATE `tbl_member` SET `memberAge`=42 WHERE `memberID`='p104';
 UPDATE `tbl_member` SET `memberAddr`='조선' WHERE `memberID`='p105';
 
 DELETE FROM `tbl_member` WHERE `memberID`='p103';
-SELECT * FROM `tbl_member`;
 
+
+###############  SELECT*FROM `tbl_product`;
 
 SELECT `productName` FROM `tbl_product`;
 SELECT `productName`,`price` FROM `tbl_product`;
+
 SELECT * FROM `tbl_product` WHERE `company`='LG';
 SELECT * FROM `tbl_product` WHERE `company`='삼성';
 
 UPDATE `tbl_product` SET `company`='삼성',`makeDate`='2021-01-01' WHERE `productcode`=5;
-SELECT * FROM `tbl_product`;
+
+
+
