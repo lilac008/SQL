@@ -132,31 +132,36 @@ INSERT INTO `Sales` (`uid`, `year`, `month`, `sale`) VALUES ('a108', 2020, 2,  7
 비교연산자 : = 같다
              <>, != 다르다
 
-논리 연산자: A IN(B)      B 중에 A가 있다
+논리 연산자: IN(B)        B 
+             A IN(B)      B 중에 A가 있다
              A NOT IN(B)  B 중에 A가 없다
              A BETWEEN ~ AND ...uid  ~부터 ...사이에 A가 있다
 				 A not BETWEEN ~ AND ...uid  ~부터 ...사이에 A가 없다 
 검색연산자 : LIKE  와일드카드(%, _)로 문자열을 검색 
 
 ################################################
-#실습하기 5-3
+#실습하기 5-3                                              SELECT * FROM `Member`;
 SELECT * FROM `Member` WHERE `name`='김유신';
 SELECT * FROM `Member` WHERE `pos`='차장' and dep=101;
 SELECT * FROM `Member` WHERE `pos`='차장' or dep=101;
 SELECT * FROM `Member` WHERE `name`!='김춘추';
 SELECT * FROM `Member` WHERE `name`<>'김춘추';
 SELECT * FROM `Member` WHERE `pos`='사원' OR `pos`='대리';
-SELECT * FROM `Member` WHERE `pos`IN('사원','대리');
-SELECT * FROM `Member` WHERE `dep`IN(101, 102, 103);
-SELECT * FROM `Member` WHERE `name` LIKE '%신';
+
+SELECT * FROM `Member` WHERE `pos` IN('사원','대리');
+SELECT * FROM `Member` WHERE `dep` IN(101, 102, 103);
+
+SELECT * FROM `Member` WHERE `name` LIKE '%신';  
 SELECT * FROM `Member` WHERE `name` LIKE '김%';
 SELECT * FROM `Member` WHERE `name` LIKE '김__';
 SELECT * FROM `Member` WHERE `name` LIKE '_성_';
 SELECT * FROM `Member` WHERE `name` LIKE '정_';
-SELECT * FROM `Sales` WHERE `sale` > 50000;
+#                                                                SELECT*FROM `Sales`;
+SELECT * FROM `Sales` WHERE `sale` > 50000;              
 SELECT * FROM `Sales` WHERE `sale` >= 50000 AND `sale` < 100000 AND `month`=1;
 SELECT * FROM `Sales` WHERE `sale` BETWEEN 50000 AND 100000;
 SELECT * FROM `Sales` WHERE `sale` NOT BETWEEN 50000 AND 100000;
+
 SELECT * FROM `Sales` WHERE `year` IN(2020);
 SELECT * FROM `Sales` WHERE `Month` IN(1,2);
 
@@ -168,32 +173,35 @@ SELECT col1, ... FROM 테이블명 ORDER BY 기준칼럼명 ASC;
 SELECT col1, ... FROM 테이블명 ORDER BY 기준칼럼명 desc;
 
 ################################################
-#실습하기 5-4
+#실습하기 5-4                                                    SELECT*FROM `Sales`;
 SELECT * FROM `Sales` ORDER BY `sale`;
 SELECT * FROM `Sales` ORDER BY `sale` ASC;
 SELECT * FROM `Sales` ORDER BY `sale` DESC;
 SELECT * FROM `Member` ORDER BY `name`;
 SELECT * FROM `Member` ORDER BY `name` DESC;
 SELECT * FROM `Member` ORDER BY `rdate` ASC;
+
 SELECT * FROM `Sales` WHERE `sale` > 50000 ORDER BY `sale` DESC;
-SELECT * FROM `Sales` WHERE `sale` > 50000 ORDER BY `year`,`month`,`sale` DESC;
+SELECT * FROM `Sales` WHERE `sale` > 50000 ORDER BY `year`,`month`,`sale` DESC;          #????????????????????
 
 
 
 ################################################
-3. 레코드 수를 제한해서 추출
+3. Record 수를 제한해서 추출   ( field - record - file 순으로 파일 구성  단위)
 
-SELECT col1, ... FROM 테이블명 LIMIT 표시할레코드수;
+SELECT col1, ... FROM 테이블명 LIMIT 표시할레코드 수;
 ################################################
-#실습하기 5-5
+#실습하기 5-5                                                    SELECT*FROM `Sales`;
 
 SELECT * FROM Sales LIMIT 3;
 SELECT * FROM Sales LIMIT 0, 3;
 SELECT * FROM Sales LIMIT 1, 3;
 SELECT * FROM Sales LIMIT 4, 5;
+
 SELECT * FROM Sales ORDER BY `sale` DESC LIMIT 3,5;
+
 SELECT * FROM Sales WHERE `sale` < 50000 ORDER BY `sale` DESC LIMIT 3;
-SELECT * FROM Sales WHERE `sale` > 50000 ORDER BY `year` DESC, `month`, `sale` DESC LIMIT 5;
+SELECT * FROM Sales WHERE `sale` > 50000 ORDER BY `year` DESC, `month`, `sale` DESC LIMIT 5;     #?????????????????????
 
 
 
@@ -209,98 +217,124 @@ SELECT * FROM Sales WHERE `sale` > 50000 ORDER BY `year` DESC, `month`, `sale` D
              SUBSTRING(`문자열`,2,3) 문자열에서 2번째 문자부터 3개의 문자 표시
 날짜함수 : NOW() DATETIME형 칼럼에 현재 날짜와 시간을 입력 
 ################################################
-#실습하기 5-6
+#실습하기 5-6                                                    SELECT*FROM `Sales`;
+#                                                                SELECT*FROM `Member`;
 SELECT SUM(`sale`) AS `합계` FROM `Sales`;
 SELECT AVG(`sale`) AS `평균` FROM `Sales`;
 SELECT Max(`sale`) AS `최대값` FROM `Sales`;
-SELECT min(`sale`) AS `최소값` FROM `Sales`;
-SELECT count(`sale`) AS `갯수` FROM `Sales`;
-SELECT COUNT(*) AS `갯수` FROM `Sales`;
-SELECT SUBSTRING(hp, 10, 4) AS '전화번호 끝자리' FROM `Member`;
+SELECT min(sale) AS `최소값` FROM `Sales`;
+SELECT count(sale) AS `갯수` FROM `Sales`;
+SELECT COUNT(*) AS `갯수` FROM `Sales`;                          #                ????????????????????
+
+
+SELECT SUBSTRING(hp, 0, 4) AS '전화번호 끝자리' FROM `Member`;
+SELECT SUBSTRING(hp, 1, 4) AS '전화번호 끝자리' FROM `Member`;
+SELECT SUBSTRING(hp, 2, 4) AS '전화번호 끝자리' FROM `Member`;
+SELECT SUBSTRING(hp, 9, 4) AS '전화번호 끝자리' FROM `Member`;
+SELECT SUBSTRING(`hp`, 10, 4) AS '전화번호 끝자리' FROM `Member`;
+SELECT SUBSTRING(`hp`, 11, 4) AS '전화번호 끝자리' FROM `Member`;
 INSERT INTO `Member` VALUES ('b101', '을지문덕', '010-5555-1234', '사장', 107, NOW());
 
-#확인문제1.
-SELECT SUM(`Sales`) AS `2018년 1월 총매출` FROM `Sales` WHERE `year`=2018 AND `month`=1;
 
-#확인문제2.
-SELECT SUM(`Sales`) AS `총합`. AVG(`sale`) AS `평균` FROM `Sales` WHERE `year`=2019 AND `month`=2 AND sale` > 50000;
- 
-#확인문제3
-SELECT MIN(`Sales`),MAX(`Sales`) FROM `Sales` WHERE `year` = 2019
+#                                                       SELECT*FROM `Sales`;  
+#확인문제1. 2018년 1월 매출의 총합을 구하시오              
+SELECT SUM(`sale`) AS `2018/01 총매출` FROM `Sales` WHERE `year`=2018 AND `month`=1;
 
+#확인문제2. 2019년 2월달에 5만원 이상 매출에 대한 총합과 평균을 구하시오
+SELECT SUM(`sale`) AS `총합`, AVG(`sale`) AS `평균` FROM `Sales` WHERE `year`=2019 AND `month`=2  AND `sale` > 50000;
+
+#확인문제3. 2020년 전체 매출 가운데 최저, 최고, 매출을 구하시오
+SELECT MIN(`sale`) AS `최저`,  MAX(`sale`) AS `최고` FROM 	`Sales` WHERE 	`year` = 2020;
 
 
 
 ################################################
-5-1. 그룹별로 추출
+5-1. 그룹별로 추출 
 
 SELECT col1, ... FROM 테이블명 GROUP BY 그룹화칼럼명 ;
+SELECT col1, ... FROM 테이블명 GROUP BY 그룹화칼럼명 HAVING 조건 ;
 
+# COUNT(*)                                        : 테이블의 모든 ROW의 수를 센다.
+# COUNT(COLUMN)                                   : 해당 COLUMN이 NOT NULL인 ROW의 수만 센다.
+# COUNT(DISTINCT COLUMN)                          : 해당 COLUMN의 중복을 제거하고 NOT NULL인 ROW의 수를 센다.
+# COUNT(DISTINCT CASE WHEN condition THEN result) : 조건에 해당하는 COLUMN의 NOT NULL인 ROW의 수를 센다.
 ################################################
-#실습하기 5-7
-SELECT * FROM `Sales` GROUP BY `uid`;
-SELECT * FROM `Sales` GROUP BY `year`;
-SELECT * FROM `Sales` GROUP BY `uid`,`year`;
-SELECT `uid`, COUNT(*) AS `건수` FROM `Sales` GROUP BY `uid`;
+#실습하기 5-7                                              SELECT*FROM `Sales`; 
+
+# 선택한 그룹별로 분류하되 다른 항목도 모두 보임
+SELECT*FROM `Sales` GROUP BY `uid`;
+SELECT*FROM `Sales` GROUP BY `year`;
+SELECT*FROM `Sales` GROUP BY `uid`,`year`;
+
+# 선택항목만 보임
+SELECT `uid`, COUNT(*)  AS `건수` FROM `Sales` GROUP BY `uid`;
 SELECT `uid`, SUM(sale) AS `합계` FROM `Sales` GROUP BY `uid`;
 SELECT `uid`, AVG(sale) AS `평균` FROM `Sales` GROUP BY `uid`;
 
+SELECT `uid`,`year`, SUM(sale) AS `합계` FROM `Sales` GROUP BY `uid`, `year`;
+SELECT `uid`,`year`, SUM(sale) AS `합계` FROM `Sales` GROUP BY `uid`, `year` ORDER BY `year`ASC, `합계` DESC;
+SELECT `uid`,`year`, SUM(sale) AS `합계` FROM `Sales` WHERE `sale`>=50000  GROUP BY `uid`, `year`  ORDER BY `합계` DESC;
 
-SELECT `uid`,`year`, SUM(sale) AS `합계` FROM `Sales` WHERE `sale`>=50000 GROUP BY `uid`, `year` ORDER BY `합계` DESC;
-
-
-
-################################################
-5-2. 그룹별로 추출
-     그룹화에 검색조건 설정
-
-SELECT col1, ... FROM 테이블명 GROUP BY 그룹화칼럼명 HAVING 조건 ;
-
-################################################
 
 #실습하기 5-8
-SELECT `uid`, SUM(sale) AS `합계` FROM `Sales` GROUP BY `uid` 
-SELECT `uid`,`year`, SUM(sale) AS `합계` FROM `Sales` WHERE `sale` >=100000 GROUP BY `uid`, `year` HAVING `합계`  >= 200000 ORDER BY `합계` DESC;
+# SELECT `uid`, SUM(sale) AS `합계` FROM `Sales` GROUP BY `uid`;
+SELECT `uid`, SUM(sale) AS `합계` FROM `Sales` GROUP BY `uid` HAVING SUM(sale) >= 200000;
+
+SELECT `uid`,`year`, SUM(sale) AS `합계` FROM `Sales` WHERE `sale` >=100000 GROUP BY `uid`, `year` HAVING  SUM(sale) >=200000 ORDER BY `합계` DESC;
+
+
 
 
 
 
 ################################################
-6-1. 테이블합치기 (2개 이상의 테이블에서 레코드 추출, 중복제외)
+6. 테이블합치기 
+
+
+6-1.  테이블합치기(2개 이상의 테이블에서 record 추출, 중복제외)
 
 SELECT 칼럼명 FROM 테이블명1 
 UNION
 SELECT 칼럼명 FROM 테이블명2;
 
-################################################
-#실습하기 5-9
-CREATE TABLE `Sales2` LIKE `Sales`;
-INSERT INTO `Sales2` SELECT * from `Sales`;
-UPDATE `Sales2` SET `year` = `year` + 3;
-
-SELECT * FROM `Sales` UNION SELECT * FROM `Sales2`;
-
-SELECT `uid`,`year`,SUM(`sale`) AS `합계` 
-FROM `Sales` 
-group BY `uid`,`year`
-UNION
-SELECT `uid`,`year`,SUM(`sale`) AS `합계` 
-FROM `Sales2` 
-group BY `uid`,`year` 
-ORDER BY `year` ASC, `합계` DESC;
-
-
-
-################################################
-6-2. 테이블합치기 (2개 이상의 테이블에서 레코드 추출, 중복허용)
+6-2.  테이블합치기(2개 이상의 테이블에서 record 추출, 중복허용)
 
 SELECT 칼럼명 FROM 테이블명1 
 UNION ALL 
 SELECT 칼럼명 FROM 테이블명2;
 
-################################################
 
-#실습하기 5-10
+################################################
+#실습하기 5-9  (중복제외)                                       select*from `sales2`;
+CREATE TABLE `Sales2` LIKE `Sales`;
+INSERT INTO `Sales2` SELECT * from `Sales`;
+UPDATE `Sales2` SET `year` = `year` + 3;
+
+
+SELECT*FROM `Sales`  UNION  SELECT*FROM `Sales2`;
+(SELECT*FROM `Sales`)  UNION  (SELECT*FROM `Sales2`);
+
+SELECT `uid`,`year`,`sale` FROM Sales 
+UNION
+SELECT `uid`,`year`,`sale` FROM Sales2;
+
+SELECT `uid`,`year`,SUM(`sale`) AS `합계` FROM `Sales` GROUP BY `uid`,`year` 
+UNION
+SELECT `uid`,`year`,SUM(`sale`) AS `합계` FROM `Sales2` GROUP BY `uid`,`year` 
+ORDER BY `year` ASC, `합계` DESC;
+
+
+#실습하기 5-10  (ALL 중복허용)
+SELECT `seq`,`uid`,`sale` FROM sales
+UNION
+SELECT `seq`,`uid`,`sale` FROM sales2;            //아래와 비교
+
+
+SELECT `seq`,`uid`,`sale` FROM sales
+UNION ALL
+SELECT `seq`,`uid`,`sale` FROM sales2;           //위와 비교 
+
+
 SELECT * FROM `Sales` UNION ALL SELECT * FROM `Sales2`
 
 
@@ -311,48 +345,110 @@ SELECT * FROM `Sales` UNION ALL SELECT * FROM `Sales2`
 7-1. 테이블 결합
 
 내부 조인 : SELECT 칼럼 FROM 테이블1 INNER JOIN 테이블2 ON 테이블1.칼럼=테이블2.칼럼;
-################################################
-#실습하기 5-11
-SELECT * FROM `Sales` 
-JOIN `Member` 
-ON `Sales`.uid = `Member`.uid;
 
-SELECT 
-		a.seq,
-		a.uid,
-		a.year,
-		a.month,
-		a.sale,
-		b.name,
-		b.hp,
-		b.pos		
+외부 조인 : SELECT 칼럼 FROM 테이블1 LEFT JOIN 테이블2 ON 테이블1.칼럼=테이블2.칼럼;
+            SELECT 칼럼 FROM 테이블1 RIGHT JOIN 테이블2 ON 테이블1.칼럼=테이블2.칼럼;
+            
+################################################
+#실습하기 5-11   내부조인                                  select*from `sales`;
+#                                                          select*from `member`;
+SELECT*FROM `Sales` INNER JOIN `Member` ON Sales.uid = Member.uid; 
+
+SELECT Sales.`seq`, Sales.`year`, Sales.`month`, Sales.`uid`,   `name`, `pos`, `sale` FROM  Sales JOIN  Member ON Sales.uid = Member.uid;
+
+SELECT a.`seq`, a.`uid`, `sale`, `name`, `pos` 
+FROM  `Sales` AS a
+JOIN `Member` AS b
+ON a.`uid` = b.`uid`;
+
+SELECT a.`seq`, a.`uid`, `sale`, `name`, `pos` 
+FROM  `Sales` AS a
+JOIN `Member` AS b
+USING (uid);
+
+SELECT a.`seq`, a.`uid`, `sale`, `name`, `pos` 
+FROM  `Sales` AS a
+JOIN `Member` AS b
+WHERE a.uid = b.`uid;
+
+SELECT a.`seq`, a.`uid`, `sale`, `name`, `pos` 
+FROM  `Sales` AS a
+JOIN `Member` AS b
+WHERE `sale` >= 100000;
+
+SELECT a.`seq`, a.`uid`, b.`name`, b.`pos`, `year`, SUM(`sale`) AS `합계` 
+FROM  `Sales` AS a
+JOIN `Member` AS b
+ON a.`uid` = b.`uid`
+GROUP BY a.`uid`, a.`year`
+HAVING `합계` >= 100000
+ORDER BY a.`year` ASC, `합계` DESC;
+
+SELECT*FROM `Sales` AS a
+JOIN `Member`     AS b ON a.uid = b.uid
+JOIN `Department` AS c ON b.dep = c.depNo;
+
+
+SELECT a.`seq`, a.`uid`, a.`sale`, b.`name`, b.`pos`, c.`name`
+FROM  `Sales`     AS a
+JOIN `Member`     AS b  USING(uid)
+JOIN `Department` AS c  ON b.dep = c.depNo;
+
+
+SELECT a.`seq`, a.`uid`, a.`sale`, b.`name`, b.`pos`, c.`name`
+FROM  `Sales` AS a
+JOIN `Member`     AS b  USING(uid)
+JOIN `Department` AS c  ON b.dep = c.depNo
+WHERE `sale` > 100000 ORDER BY `sale` DESC;
+
+
+
+############################
+# 수업시간 설명
+SELECT*FROM `Sales` JOIN `Member` ON `Sales`.uid = `Member`.uid;
+
+SELECT a.seq, a.uid, a.year, a.month, a.sale, b.name, b.hp, b.pos		
 FROM `Sales`  AS a
 JOIN `Member` AS b
 ON a.uid = b.uid;
 
-SELECT * 
-FROM `Sales`  AS a
-JOIN `Member` AS b
+
+SELECT * FROM `Sales`  AS a
+JOIN          `Member` AS b
 USING(`uid`);
 
-SELECT * 
-FROM `Sales`      AS a
-JOIN `Member`     AS b  ON a.uid = b.uid
-JOIN `Department` AS c  ON b.dep = c.depNo;
+
+SELECT * FROM   `Sales`   AS a
+JOIN           `Member`   AS b  ON a.uid = b.uid
+JOIN         `Department` AS c  ON b.dep = c.depNo;
+############################################
 
 
 
-################################################
-7-2. 테이블 결합
+#실습하기 5-12    외부조인
 
-외부 조인 : SELECT 칼럼 FROM 테이블1 LEFT JOIN 테이블2 ON 테이블1.칼럼=테이블2.칼럼;
-            SELECT 칼럼 FROM 테이블1 RIGHT JOIN 테이블2 ON 테이블1.칼럼=테이블2.칼럼;
-################################################
-#실습하기 5-12
+SELECT*FROM `Sales`  LEFT JOIN `Member` ON `Sales`.uid = `Member`.uid;
+
+SELECT*FROM `Sales` RIGHT JOIN `Member` ON `Sales`.uid = `Member`.uid;
+
+
+SELECT a.seq, a.uid, `sale`, `name`, `pos`
+FROM sales AS a
+LEFT JOIN  member AS b USING(uid);
+
+SELECT a.seq, a.uid, `sale`, `name`, `pos`
+FROM sales AS a
+RIGHT JOIN member AS b USING(uid);
+
+
+	
+#########################
+수업시간 설명
 SELECT * FROM `sales` AS a
 FROM `sales` AS a
 JOIN `member` AS b
 ON a.uid = b.uid;
+####################
 
 
 
@@ -361,13 +457,12 @@ ON a.uid = b.uid;
 
 
 
-
-#확인문제1
-
+#확인문제1   모든 직원의 아이디, 이름, 직급, 부서명을 조회하시오. 
 
 
 
-#확인문제2
+
+#확인문제2   김유신 직원의 2019년도 매출 합을 조회하시오   
 SELECT a.uid, b.name, a.year, SUM(`sale`) AS `합계`
 FROM `Sales` AS a
 JOIN `Member` AS b
@@ -376,6 +471,7 @@ WHERE
 	b.name =
 	
 	
-# 확인문제3
-Se
+# 확인문제3   2019년 50,000이상의 매출에 대해 직원별 매출의 합이 100,000원 이상인 직원의 이름, 부서명, 직급, 년도, 매출 합을 조회하시오. 
+#             단, 매출 합이 큰 순서부터 정렬
+
 
