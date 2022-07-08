@@ -5,7 +5,8 @@
 
 ####################################################
 1. PRIMARY KEY(기본키) : 값이 중복되지 않으며, 반드시 입력
-####################################################
+
+
 
 # 실습하기 2-1
 CREATE TABLE `user2` 
@@ -22,11 +23,14 @@ INSERT INTO `user2` VALUES ('a104','강감찬','010-1234-4444', 45);
 INSERT INTO `user2` VALUES ('a105','이순신','010-1234-5555', 51);
 INSERT INTO `user2` VALUES ('a106','정약용','010-1234-6666', 42);
 
-SELECT*FROM USER2;
+SELECT*FROM user2;
+
+
 
 ####################################################
 2. UNIQUE(고유키) : 값이 중복되지 않으며 NULL 입력 가능.
-####################################################
+
+
 
 # 실습하기 2-2
 CREATE TABLE `user3` 
@@ -45,6 +49,8 @@ INSERT INTO `user3` VALUES ('a106','정약용','010-1234-6666', 42);
 
 SELECT*FROM USER3;
 
+
+
 ####################################################
 3. 
 FOREIGN KEY(외래키) : 두 테이블을 연결 (외래키를 가진 식테이블 + 외래키값을 제공하는 모테이블).
@@ -53,7 +59,9 @@ FOREIGN KEY(외래키) : 두 테이블을 연결 (외래키를 가진 식테이�
 CREATE TABLE 테이블명 
 (      col명     dataTYPE      Foreign KEY(`col1`) REFERENCES `모테이블명` (`id1`) 
 );
-####################################################
+
+
+
 # 실습하기 2-3
 CREATE TABLE `parent` 
 (	`uid`		VARCHAR(10) PRIMARY KEY,
@@ -90,7 +98,8 @@ SELECT*FROM `user4`;
 
 ####################################################
 4. AUTO_INCREMENT 키워드
-####################################################
+
+
 
 # 실습하기 2-4
 CREATE TABLE `user5` 
@@ -118,7 +127,9 @@ SELECT*FROM `user5`;
 5. DEFAULT : 값을 입력하지 않아도 자동으로 입력되는 기본값. 모든 COLUMN의 DEFAULT는 null
    NULL : 아무것도 없는 값.
   	NOT NULL : 반드시 데이터를 입력받아야 함.
-####################################################
+
+
+
 # 실습하기 2-5
 CREATE TABLE `user6` 
 (	`seq`		INT          AUTO_INCREMENT PRIMARY KEY,
@@ -148,7 +159,10 @@ TABLE 복사     : CREATE TABLE 새테이블명 LIKE 기존테이블명;
 
 TABLE DATA 복사: INSERT INTO 새테이블명 (`col1`...) SELECT `col1`... FROM 기존테이블명;
                  INSERT INTO 새테이블명 SELECT*FROM 기존테이블명;
-####################################################
+
+
+
+
 # 실습하기 2-6
 CREATE TABLE `user7` LIKE `user6`;
 SELECT*FROM `user7`;
@@ -159,4 +173,8 @@ INSERT INTO `user7` (`name`, `gender`, `age`, `addr`) SELECT `name`, `gender`, `
 INSERT INTO `user7` SELECT * FROM `user6`;
 
 SELECT*FROM `user7`;
+
+
+
+
 

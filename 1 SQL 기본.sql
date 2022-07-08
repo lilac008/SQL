@@ -23,7 +23,7 @@ MySQL DATA TYPE
 CREATE DATABASE DB명
 DROP DATABASE DB명
 USE DB명
-##########################################
+###########################################
 
 #실습하기 1-1
 CREATE DATABASE `MyDB`;
@@ -34,12 +34,13 @@ DROP DATABASE `testDB`;
 
 
 
+
 ##########################################
 2. TABLE 생성/제거
 CREATE TABLE 테이블명
 DROP TABLE if EXISTS 테이블명
 DROP TABLE 테이블명
-##########################################
+###########################################
 
 #실습하기 1-2
 USE testdb;
@@ -54,12 +55,12 @@ DROP TABLE `User1`;
 
 
 
+
 ##########################################
 3. TABLE data 추가
 추가           : INSERT INTO 테이블명 VALUES (데이터1, ...);
 칼럼 지정 추가 : INSERT INTO 테이블명(col 1, ...) VALUES (데이터1,...);
                  INSERT INTO 테이블명 SET `col 1`='데이터1', ...;
-
 ##########################################
 
 #실습하기 1-3
@@ -71,6 +72,7 @@ INSERT INTO `User1` (`uid`, `name`, `age`) VALUES ('A104', '강감찬', 45);
 INSERT INTO `User1` SET `uid`  = 'A105', 
 								`name` = '이순신', 
 								`hp`   = '010-1234-5555';
+
 
 
 
@@ -98,12 +100,14 @@ SELECT * FROM `User1` WHERE `age` > 30;
 
 
 
+
 ##########################################
 5. TABLE data 수정
 UPDATE 테이블명 SET col 1=데이터1...;
 UPDATE 테이블명 SET col 1=데이터1...where 위치;
 
 ##########################################
+
 #실습하기 1-5
 UPDATE `User1` SET `hp`='010-1234-4444' WHERE `uid`='A104';
 
@@ -117,6 +121,7 @@ UPDATE `User1` SET
 						
 						
 SELECT * FROM `User1`;						
+
 
 
 
@@ -136,3 +141,6 @@ DELETE FROM `User1` WHERE `age`>=30;
 
 
 SELECT * FROM `User1`;	
+
+
+

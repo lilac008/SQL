@@ -21,6 +21,8 @@ CREATE TABLE `tbl_product`
 	`makeDate`		DATE 
 );
 
+
+
 # 실습하기 4-2
 INSERT INTO `tbl_member` VALUES ('p101','김유신','010-1234-1001',25,'신라');
 INSERT INTO `tbl_member` VALUES ('p102','김춘추','010-1234-1002',23,'신라');
@@ -39,6 +41,8 @@ INSERT INTO `tbl_product` (`productName`, `price`) VALUES ('컴퓨터', 1100);
 INSERT INTO `tbl_product` (`productName`, `price`, `amount`, `company`, `makeDate`) VALUES ('휴대폰', 900, 102, '삼성', '2022-01-06');
 
 SELECT*FROM `tbl_product`;
+
+
 
 
 # 실습하기 4-3
